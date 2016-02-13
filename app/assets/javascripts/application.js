@@ -14,3 +14,40 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+// $(document).on('click', '.blog_rating', function)
+
+jQuery(function ($) {
+
+$('#blog_rating').raty({ 
+    number: 5,
+    half: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    click: function(score,evt) {
+    	alert(score);
+      $.ajax({
+      url: '/blogs/rating',
+      type: 'get',
+      data: {
+        score: score,
+        id: $('#blog_id').val()
+
+      }
+    })
+        }
+  });
+	
+	$('.rating').raty({
+    number: 5,
+    half: true,
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+
+})
+
